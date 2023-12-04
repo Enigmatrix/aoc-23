@@ -130,7 +130,7 @@ fn part2() -> Result<(), Error> {
                 num = None;
             }
         }
-                let mut seen = HashSet::new();
+        let mut seen = HashSet::new();
         if let Some(val) = num {
             for itercol in fidx..grid[row].len() {
                 for dx in [1i32, 0, -1] {
@@ -150,14 +150,14 @@ fn part2() -> Result<(), Error> {
                             .map(|row| row.get(ncol as usize))
                             .is_some_and(|c| c.is_some_and(|c| *c == '*'))
                         {
-                                    if seen.contains(&(nrow, ncol)) {
-                                        continue;
-                                    }
-                                    gears
-                                        .entry((nrow, ncol))
-                                        .or_insert_with(|| Vec::new())
-                                        .push(val);
-                                    seen.insert((nrow, ncol));
+                            if seen.contains(&(nrow, ncol)) {
+                                continue;
+                            }
+                            gears
+                                .entry((nrow, ncol))
+                                .or_insert_with(|| Vec::new())
+                                .push(val);
+                            seen.insert((nrow, ncol));
                         }
                     }
                 }
@@ -166,12 +166,13 @@ fn part2() -> Result<(), Error> {
         fidx = 0;
         num = None;
     }
-    
+
     for (_, ratios) in gears {
-        if ratios.len() != 2 { continue; }
+        if ratios.len() != 2 {
+            continue;
+        }
         sum += ratios[0] * ratios[1];
     }
-
 
     println!("part2: {sum}");
 
