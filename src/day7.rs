@@ -3,7 +3,6 @@
 use std::cmp::Ordering;
 use std::collections::HashMap;
 use std::io::Error;
-use std::str::FromStr;
 
 #[derive(PartialEq, Eq, Clone)]
 struct Hand {
@@ -48,13 +47,13 @@ impl PartialOrd for Hand {
             } else if freqcount == 4 {
                 return 6;
             } else if freqcount == 3 {
-                if freq.iter().any(|(c, count)| *count == 2) {
+                if freq.iter().any(|(_c, count)| *count == 2) {
                     return 5;
                 } else {
                     return 4;
                 }
             } else if freqcount == 2 {
-                if freq.iter().filter(|(c, count)| **count == 2).count() == 2 {
+                if freq.iter().filter(|(_c, count)| **count == 2).count() == 2 {
                     return 3;
                 } else {
                     return 2;

@@ -1,7 +1,6 @@
 #![cfg(test)]
 
 use std::io::Error;
-use std::str::FromStr;
 
 #[test]
 fn part1() -> Result<(), Error> {
