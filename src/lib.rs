@@ -10,6 +10,7 @@ mod day5;
 mod day6;
 mod day7;
 mod day8;
+mod day9;
 
 pub fn input(day: u32) -> impl Seek + BufRead {
     let file = File::open(format!("inputs/{day:02}.txt")).expect("input not found");
