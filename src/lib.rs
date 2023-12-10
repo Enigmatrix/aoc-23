@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader, Seek};
 
 mod day1;
+mod day10;
 mod day2;
 mod day3;
 mod day4;
