@@ -48,7 +48,6 @@ impl Grid {
         innerdirs: &mut HashMap<(isize, isize), Dir>,
         mut pos: (isize, isize),
         mut dir: Dir,
-        mut count: usize,
         path: &mut Vec<(isize, isize)>,
     ) -> Option<Vec<(isize, isize)>> {
         loop {
@@ -176,7 +175,6 @@ impl Grid {
 
                 pos = Self::nextfordir(pos, &ndir);
                 dir = ndir;
-                count += 1;
                 innerdir = ninnerdir;
             } else {
                 return None;
@@ -188,7 +186,6 @@ impl Grid {
         &self,
         mut pos: (isize, isize),
         mut dir: Dir,
-        mut count: usize,
         path: &mut Vec<(isize, isize)>,
     ) -> Option<Vec<(isize, isize)>> {
         loop {
@@ -233,7 +230,6 @@ impl Grid {
 
                 pos = Self::nextfordir(pos, &ndir);
                 dir = ndir;
-                count += 1;
             } else {
                 return None;
             }
@@ -257,8 +253,8 @@ fn part1() -> Result<(), Error> {
     let grid = Grid { inner: grid };
     for dir in [Dir::North, Dir::East, Dir::South, Dir::West] {
         let mut path = Vec::new();
-        if let Some(path) = grid.next(Grid::nextfordir(start, &dir), dir, 1, &mut path) {
-    println!("part1: {}", path.len() / 2 + 1);
+        if let Some(path) = grid.next(Grid::nextfordir(start, &dir), dir, &mut path) {
+            println!("part1: {}", path.len() / 2 + 1);
             break;
         }
     }
@@ -284,7 +280,7 @@ fn part2() -> Result<(), Error> {
     let mut inners = HashSet::new();
 
     let mut opath = Vec::new();
-    grid.next(Grid::nextfordir(start, &dir), dir.clone(), 1, &mut opath);
+    grid.next(Grid::nextfordir(start, &dir), dir.clone(), &mut opath);
     opath.push(start);
 
     let mut innerdirs = HashMap::new();
@@ -295,7 +291,6 @@ fn part2() -> Result<(), Error> {
         &mut innerdirs,
         Grid::nextfordir(start, &dir),
         dir,
-        1,
         &mut opath,
     ) {
         path.push(start);
